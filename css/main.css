@@ -27,6 +27,10 @@ body {
 
 h1, h2, h3 { line-height: 1; }
 
+p {
+    margin-top: 0;
+}
+
 .btn {
     cursor: pointer;
     display: inline-block;
@@ -150,6 +154,26 @@ header {
     padding: 3rem 1rem 5rem;
 }
 
+@media (min-width: 700px) {
+    .main {
+        display: grid;
+        grid-template-columns: 
+            minmax(1em, 1fr) minmax(20rem, 50ch) minmax(1em, 3fr);
+        justify-items: start;
+    }
+
+    .main > * { grid-column: 2 / 3; }
+
+    .main--ski {
+        background-position: left bottom; 
+    }
+
+}
+
+@media (min-width: 1200px) {
+    .main--ski { background-position: center right; }
+}
+
 .main--ski {
     background-image: url(../images/skiier.jpg);
     background-size: cover;
@@ -159,4 +183,9 @@ header {
     line-height: 1;
     font-weight: var(--fw-black);
     font-size: 3rem;
+    margin-bottom: 0;
+}
+
+.main__intro {
+    margin-bottom: 2em;
 }
