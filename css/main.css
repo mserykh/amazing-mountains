@@ -13,7 +13,11 @@
     --fw--normal: 400;
     --fw-bold: 700;
     --fw-black: 900;
-    --grid: 1fr;
+    --grid: minmax(1em, 10%)
+            minmax(10rem, 22ch)
+            minmax(10rem, 23ch)
+            minmax(1em, 3fr)
+            max-content;
 }
 
 body {
@@ -44,6 +48,10 @@ p {
 }
 
 
+.btn + .btn {
+    margin-left: 1em;
+}
+
 .btn--primary {
     background-color: var(--clr-primary);
     color: var(--clr-light);
@@ -51,7 +59,6 @@ p {
 
 .btn--primary:hover {
     background-color: var(--clr-dark);
-    color: var(--clr-light);
 }
 
 .btn--outline {
@@ -78,9 +85,8 @@ header {
 .nav__list {
     display: flex;
     justify-content: space-between;
-    margin: 0;
-    /*margin-top: 1em;*/
-    padding: 0;
+    margin: 0 auto;
+    max-width: 35rem;
     padding: 1rem;
     list-style: none;
     font-size: 0.875rem;
@@ -89,9 +95,18 @@ header {
     letter-spacing: 1px;
 }
 
+.nav__list-item {
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
 .nav__link {
     text-decoration: none;
     color: inherit;
+}
+
+.nav__link:hover {
+    color: var(--clr-primary);
 }
 
 .weather {
@@ -99,6 +114,10 @@ header {
     grid-template-columns: min-content 1fr;
     background: var(--clr-dark);
     color: var(--clr-light);
+    width: max-content;
+    margin: 0.5em auto -1em;
+    position: relative;
+    z-index: 1;
 }
 
 .weather__icon {
@@ -124,11 +143,13 @@ header {
 
 .weather__info span {
     color: var(--clr-light);
-    margin-left: auto;
     margin-right: 0.75rem;
     font-size: 1rem;
     text-transform: none;
+    margin-left: 1em;
 }
+
+
 
 .weather__info:first-of-type {
     margin-top: 0.5rem;
@@ -151,27 +172,7 @@ header {
 }
 
 .main {
-    padding: 3rem 1rem 5rem;
-}
-
-@media (min-width: 700px) {
-    .main {
-        display: grid;
-        grid-template-columns: 
-            minmax(1em, 1fr) minmax(20rem, 50ch) minmax(1em, 3fr);
-        justify-items: start;
-    }
-
-    .main > * { grid-column: 2 / 3; }
-
-    .main--ski {
-        background-position: left bottom; 
-    }
-
-}
-
-@media (min-width: 1200px) {
-    .main--ski { background-position: center right; }
+    padding: 3em 1em 5rem;
 }
 
 .main--ski {
@@ -183,9 +184,62 @@ header {
     line-height: 1;
     font-weight: var(--fw-black);
     font-size: 3rem;
-    margin-bottom: 0;
+    margin-bottom: 0.75em;
 }
 
 .main__intro {
-    margin-bottom: 2em;
+    margin-bottom: 4em;
 }
+
+@media (min-width: 700px) {
+    .main {
+        display: grid;
+        grid-template-columns: var(--grid);
+        justify-items: start;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .main > * { grid-column: 2 / 4; }
+
+    .main--ski {
+        background-position: left bottom; 
+    }
+
+}
+
+@media(min-width: 1000px) {
+    header {
+        display: grid;
+        grid-template-columns: var(--grid);
+        align-items: center;
+    }
+
+    .logo,
+    .nav,
+    .weather {
+        grid-row: 1;
+        margin: 0;
+    }
+
+    .weather {
+        grid-column: -2 /-1;
+        justify-self: end;
+        margin: 0;
+    }
+
+    .logo {
+        grid-column: 2;
+    }
+
+    .nav {
+        grid-column: 2 / 5;
+        justify-self: end;
+        margin-right: 3em;
+    }
+}
+
+@media (min-width: 1200px) {
+    .main--ski { background-position: center right; }
+}
+
